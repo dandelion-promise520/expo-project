@@ -5,6 +5,7 @@ Maru
 Meiryo
 Menlo
 Nativewind
+oxlint
 Pressable
 Segoe
 Tamagui

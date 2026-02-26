@@ -1,7 +1,7 @@
 import { StyleSheet, View } from "react-native";
 import Animated, { useAnimatedStyle, withTiming } from "react-native-reanimated";
 
-import { PressableScale } from "@/components/PressableScale";
+import { PressableScale } from "@/components/split-button/pressable-scale";
 import { Palette } from "@/constants";
 
 import { SplitButtonProps } from "./types";

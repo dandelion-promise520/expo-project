@@ -1,2 +1,2 @@
-export { PressableScale } from "./PressableScale";
-export { SplitButton } from "./SplitButton";
+export { SplitButton } from "./split-button";
+export { StackedCard } from "./stacked-card";
