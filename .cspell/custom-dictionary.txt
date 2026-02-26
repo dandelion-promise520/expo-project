@@ -5,6 +5,8 @@ Maru
 Meiryo
 Menlo
 Nativewind
+Pressable
 Segoe
 Tamagui
 unistyles
+worklets
