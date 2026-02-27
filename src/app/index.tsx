@@ -1,4 +1,5 @@
 import { JSX, useState } from "react";
+import { useSharedValue } from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { SplitButton, StackedCard } from "@/components";
@@ -48,6 +49,8 @@ const SplitButtonComponent = (): JSX.Element => {
 
 // 堆叠卡片组件
 const StackedCardComponent = (): JSX.Element => {
+  const progress = useSharedValue(0);
+
   return (
     <SafeAreaView
       style={{
@@ -58,7 +61,7 @@ const StackedCardComponent = (): JSX.Element => {
       }}
     >
       {new Array(4).fill(0).map((_, index) => (
-        <StackedCard key={index} index={index} />
+        <StackedCard key={index} index={index} progress={progress} />
       ))}
     </SafeAreaView>
   );

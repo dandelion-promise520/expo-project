@@ -1,22 +1,42 @@
 import { JSX } from "react";
-import { Platform, StyleSheet, View } from "react-native";
+import { Platform, StyleSheet } from "react-native";
+import Animated, { interpolate, useAnimatedStyle, withSpring } from "react-native-reanimated";
+import { SpringConfig } from "react-native-reanimated/lib/typescript/animation/spring";
 
 import { StackedCardProps } from "./types";
 
-export const StackedCard = ({ index }: StackedCardProps): JSX.Element => {
+export const StackedCard = ({ index, progress }: StackedCardProps): JSX.Element => {
+  // 弹簧效果
+  const SPRING: SpringConfig = { damping: 15, stiffness: 180, mass: 1 };
+
+  const reCardStyle = useAnimatedStyle(() => {
+    const translateX = interpolate(progress.value, [0, 1], [0, index * 25]);
+    const translateY = interpolate(progress.value, [0, 1], [0, -index * 5]);
+    const rotate = interpolate(progress.value, [0, 1], [-index * 10, index * 10]);
+    return {
+      transform: [
+        { translateX: translateX }, //index * 25
+        { translateY: translateY }, //-index * 5
+        { rotate: `${rotate}deg` }, //`${index * 10}deg`
+      ],
+    };
+  });
+
   return (
-    <View
+    <Animated.View
       style={[
         styles.card,
+        reCardStyle,
         {
           zIndex: -index,
-          transform: [
-            { translateX: 0 }, //index * 25
-            { translateY: 0 }, //-index * 5
-            { rotate: `${-index * 10}deg` }, //`${index * 10}deg`
-          ],
         },
       ]}
+      onTouchStart={() => {
+        progress.set(withSpring(1, SPRING));
+      }}
+      onTouchEnd={() => {
+        progress.set(withSpring(0, SPRING));
+      }}
     />
   );
 };

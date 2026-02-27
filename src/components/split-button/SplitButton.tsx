@@ -12,12 +12,12 @@ export const SplitButton = ({
   mainAction,
   rightAction,
 }: SplitButtonProps) => {
-  const LeftButtonStyle = useAnimatedStyle(() => {
+  const reLeftButtonStyle = useAnimatedStyle(() => {
     const buttonFlex = splitted ? 1 : 0;
     return { flex: withTiming(buttonFlex) };
   }, [splitted]);
 
-  const RightButtonStyle = useAnimatedStyle(() => {
+  const reRightButtonStyle = useAnimatedStyle(() => {
     const buttonBackgroundColor = splitted
       ? rightAction.backgroundColor
       : mainAction.backgroundColor;
@@ -28,12 +28,12 @@ export const SplitButton = ({
     };
   }, [splitted]);
 
-  const disappearTextStyle = useAnimatedStyle(() => {
+  const reDisappearTextStyle = useAnimatedStyle(() => {
     const textOpacity = splitted ? 1 : 0;
     return { opacity: withTiming(textOpacity) };
   }, [splitted]);
 
-  const appearTextStyle = useAnimatedStyle(() => {
+  const reAppearTextStyle = useAnimatedStyle(() => {
     const textOpacity = splitted ? 0 : 1;
     return { opacity: withTiming(textOpacity) };
   }, [splitted]);
@@ -41,22 +41,22 @@ export const SplitButton = ({
   return (
     <View style={{ height: 60, paddingHorizontal: 20, flexDirection: "row" }}>
       <PressableScale
-        style={[styles.button, LeftButtonStyle, { backgroundColor: leftAction.backgroundColor }]}
+        style={[styles.button, reLeftButtonStyle, { backgroundColor: leftAction.backgroundColor }]}
         onPress={leftAction.onPress}
       >
-        <Animated.Text style={[styles.label, disappearTextStyle]} numberOfLines={1}>
+        <Animated.Text style={[styles.label, reDisappearTextStyle]} numberOfLines={1}>
           {leftAction.label}
         </Animated.Text>
       </PressableScale>
 
       <PressableScale
-        style={[styles.button, RightButtonStyle]}
+        style={[styles.button, reRightButtonStyle]}
         onPress={splitted ? rightAction.onPress : mainAction.onPress}
       >
-        <Animated.Text style={[styles.label, disappearTextStyle]}>
+        <Animated.Text style={[styles.label, reDisappearTextStyle]}>
           {rightAction.label}
         </Animated.Text>
-        <Animated.Text style={[styles.label, appearTextStyle]}>{mainAction.label}</Animated.Text>
+        <Animated.Text style={[styles.label, reAppearTextStyle]}>{mainAction.label}</Animated.Text>
       </PressableScale>
     </View>
   );
